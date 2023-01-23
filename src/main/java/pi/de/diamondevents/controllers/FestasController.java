@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import pi.de.diamondevents.models.Convidado;
 import pi.de.diamondevents.models.Festa;
+import pi.de.diamondevents.repositories.ConvidadoRepository;
 import pi.de.diamondevents.repositories.FestaRepository;
 
 @Controller
@@ -20,6 +22,8 @@ public class FestasController {
 
 	@Autowired
 	private FestaRepository fr;
+	@Autowired
+	private ConvidadoRepository cr;
 
 	@RequestMapping("/form")
 	public String form() {
@@ -57,6 +61,28 @@ public class FestasController {
 		Festa festa = opt.get();
 		md.addObject("festa", festa);
 
+		List<Convidado> convidados = cr.findByFesta(festa);
+		md.addObject("convidados", convidados);
+
 		return md;
+	}
+
+	@PostMapping("/{idFesta}")
+	public String salvarConvidado(@PathVariable Long idFesta, Convidado convidado) {
+
+		System.out.println("Id da festa: " + idFesta);
+		System.out.println(convidado);
+
+		Optional<Festa> opt = fr.findById(idFesta);
+		if (opt.isEmpty()) {
+			return "redirect:/festas";
+		}
+
+		Festa festa = opt.get();
+		convidado.setFesta(festa);
+
+		cr.save(convidado);
+
+		return "redirect:/festas/{idFesta}";
 	}
 }
