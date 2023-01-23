@@ -9,6 +9,6 @@ public class HomeController {
 	@RequestMapping("/")
 	public String home() {
 		System.out.println("Chamou o método home");
-		return "home";
+		return "redirect:/festas";
 	}
 }
