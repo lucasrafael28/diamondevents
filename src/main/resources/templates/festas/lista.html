@@ -36,8 +36,10 @@
 					<td th:text="${f.local}">Local</td>
 					<td th:text="${f.data}">Data</td>
 					<td th:text="${f.horario}">Horário</td>
-					<td><a th:href="@{/festas/{id}/remover(id=${f.id})}"><i
-							class="material-icons">delete</i></a></td>
+					<td>
+						<a th:href="@{/festas/{id}/selecionar(id=${f.id})}"><i class="material-icons">edit</i></a>
+						<a th:href="@{/festas/{id}/remover(id=${f.id})}"><i class="material-icons">delete</i></a>
+					</td>
 				</tr>
 			</tbody>
 		</table>

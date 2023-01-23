@@ -46,12 +46,19 @@
 				<div class="card">
 					<div class="card-content">
 						<span class="card-title">Adicionar Convidado:</span>
-						<form action="" method="post">
+						<form th:action="@{/festas/{idFesta}(idFesta=${festa.id})}"
+							method="post">
 							<div>
-								<label>Nome: </label> <input type="text" name="nome">
+								<input type="hidden" name="id" th:value="${convidado.id}"
+									readonly="readonly">
 							</div>
 							<div>
-								<label>RG: </label> <input type="text" name="rg">
+								<label>Nome: </label> <input type="text" name="nome"
+									th:value="${convidado.nome}">
+							</div>
+							<div>
+								<label>RG: </label> <input type="text" name="rg"
+									th:value="${convidado.rg}">
 							</div>
 							<div>
 								<button type="submit" class="btn">Salvar</button>
@@ -82,6 +89,8 @@
 									<td th:text="${c.nome}">Nome</td>
 									<td th:text="${c.rg}">RG</td>
 									<td><a
+										th:href="@{/festas/{idFesta}/convidados/{idConvidado}/selecionar(idFesta=${festa.id}, idConvidado=${c.id})}"><i
+											class="material-icons">edit</i></a> <a
 										th:href="@{/festas/{idFesta}/convidados/{idConvidado}/remover(idFesta=${festa.id}, idConvidado=${c.id})}"><i
 											class="material-icons">delete</i></a></td>
 								</tr>

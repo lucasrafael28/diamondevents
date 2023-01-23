@@ -26,7 +26,7 @@ public class FestasController {
 	private ConvidadoRepository cr;
 
 	@RequestMapping("/form")
-	public String form() {
+	public String form(Festa festa) {
 		return "festas/formFesta";
 	}
 
@@ -36,7 +36,7 @@ public class FestasController {
 		System.out.println(festa);
 		fr.save(festa);
 
-		return "festas/festa-adicionada";
+		return "redirect:/festas";
 	}
 
 	@GetMapping
@@ -48,7 +48,7 @@ public class FestasController {
 	}
 
 	@GetMapping("/{id}")
-	public ModelAndView detalharFesta(@PathVariable Long id) {
+	public ModelAndView detalharFesta(@PathVariable Long id, Convidado convidado) {
 		ModelAndView md = new ModelAndView();
 		Optional<Festa> opt = fr.findById(id);
 
@@ -102,17 +102,61 @@ public class FestasController {
 
 		return "redirect:/festas";
 	}
-	
+
 	@GetMapping("/{idFesta}/convidados/{idConvidado}/remover")
 	public String apagarConvidado(@PathVariable Long idFesta, @PathVariable Long idConvidado) {
 
 		Optional<Convidado> opt = cr.findById(idConvidado);
 
-		if(!opt.isEmpty()) {
+		if (!opt.isEmpty()) {
 			Convidado convidado = opt.get();
 			cr.delete(convidado);
 		}
 
 		return "redirect:/festas/{idFesta}";
+	}
+
+	@GetMapping("/{id}/selecionar")
+	public ModelAndView selecionarFesta(@PathVariable Long id) {
+		ModelAndView md = new ModelAndView();
+		Optional<Festa> opt = fr.findById(id);
+		if (opt.isEmpty()) {
+			md.setViewName("redirect:/festas");
+			return md;
+		}
+
+		Festa festa = opt.get();
+		md.setViewName("festas/formFesta");
+		md.addObject("festa", festa);
+
+		return md;
+	}
+
+	@GetMapping("/{idFesta}/convidados/{idConvidado}/selecionar")
+	public ModelAndView selecionarConvidado(@PathVariable Long idFesta, @PathVariable Long idConvidado) {
+		ModelAndView md = new ModelAndView();
+
+		Optional<Festa> optFesta = fr.findById(idFesta);
+		Optional<Convidado> optConvidado = cr.findById(idConvidado);
+
+		if (optFesta.isEmpty() || optConvidado.isEmpty()) {
+			md.setViewName("redirect:/festas");
+			return md;
+		}
+
+		Festa festa = optFesta.get();
+		Convidado convidado = optConvidado.get();
+
+		if (festa.getId() != convidado.getFesta().getId()) {
+			md.setViewName("redirect:/festas");
+			return md;
+		}
+
+		md.setViewName("festas/detalhes");
+		md.addObject("convidado", convidado);
+		md.addObject("festa", festa);
+		md.addObject("convidados", cr.findByFesta(festa));
+
+		return md;
 	}
 }
