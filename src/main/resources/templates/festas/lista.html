@@ -28,7 +28,8 @@
 			<tbody>
 				<tr th:each="f : ${festas}">
 					<td th:text="${f.id}">Id</td>
-					<td th:text="${f.nome}">Nome</td>
+					<td><a th:href="@{/festas/{id}(id=${f.id})}"><span
+							th:text="${f.nome}">Nome</span></a></td>
 					<td th:text="${f.local}">Local</td>
 					<td th:text="${f.data}">Data</td>
 					<td th:text="${f.horario}">Horário</td>
