@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 <title>Diamond Events</title>
 </head>
 <body>
@@ -71,6 +73,7 @@
 									<th>Id</th>
 									<th>Nome</th>
 									<th>Rg</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -78,6 +81,9 @@
 									<td th:text="${c.id}">Id</td>
 									<td th:text="${c.nome}">Nome</td>
 									<td th:text="${c.rg}">RG</td>
+									<td><a
+										th:href="@{/festas/{idFesta}/convidados/{idConvidado}/remover(idFesta=${festa.id}, idConvidado=${c.id})}"><i
+											class="material-icons">delete</i></a></td>
 								</tr>
 							</tbody>
 						</table>
@@ -85,5 +91,6 @@
 				</div>
 			</div>
 		</div>
+	</div>
 </body>
 </html>
