@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 <title>Diamond Events</title>
 </head>
 <body>
@@ -23,6 +25,7 @@
 					<th>Local</th>
 					<th>Data</th>
 					<th>Horário</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -33,6 +36,8 @@
 					<td th:text="${f.local}">Local</td>
 					<td th:text="${f.data}">Data</td>
 					<td th:text="${f.horario}">Horário</td>
+					<td><a th:href="@{/festas/{id}/remover(id=${f.id})}"><i
+							class="material-icons">delete</i></a></td>
 				</tr>
 			</tbody>
 		</table>

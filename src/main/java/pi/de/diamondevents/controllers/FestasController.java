@@ -85,4 +85,21 @@ public class FestasController {
 
 		return "redirect:/festas/{idFesta}";
 	}
+
+	@GetMapping("/{id}/remover")
+	public String apagarFesta(@PathVariable Long id) {
+
+		Optional<Festa> opt = fr.findById(id);
+
+		if (!opt.isEmpty()) {
+			Festa festa = opt.get();
+
+			List<Convidado> convidados = cr.findByFesta(festa);
+
+			cr.deleteAll(convidados);
+			fr.delete(festa);
+		}
+
+		return "redirect:/festas";
+	}
 }
