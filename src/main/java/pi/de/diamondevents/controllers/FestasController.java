@@ -16,7 +16,7 @@ public class FestasController {
 	
 	@RequestMapping("/festas/form")
 	public String form() {
-		return "formFesta";
+		return "festas/formFesta";
 	}
 	
 	@PostMapping("/festas")
@@ -25,6 +25,6 @@ public class FestasController {
 		System.out.println(festa);
 		fr.save(festa);
 		
-		return "festa-adicionada";
+		return "festas/festa-adicionada";
 	}
 }
