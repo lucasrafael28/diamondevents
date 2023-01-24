@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pi.de.diamondevents.models.Convidado;
 import pi.de.diamondevents.models.Festa;
@@ -34,14 +35,15 @@ public class FestasController {
 	}
 
 	@PostMapping
-	public String adicionarFesta(@Valid Festa festa, BindingResult result) {
+	public String adicionarFesta(@Valid Festa festa, BindingResult result, RedirectAttributes attributes) {
 
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			return "redirect:/festas/form";
 		}
-		
+
 		System.out.println(festa);
 		fr.save(festa);
+		attributes.addFlashAttribute("mensagem", "Festa criada!");
 
 		return "redirect:/festas";
 	}
@@ -75,7 +77,11 @@ public class FestasController {
 	}
 
 	@PostMapping("/{idFesta}")
-	public String salvarConvidado(@PathVariable Long idFesta, Convidado convidado) {
+	public String salvarConvidado(@PathVariable Long idFesta, @Valid Convidado convidado, BindingResult result, RedirectAttributes attributes) {
+
+		if (result.hasErrors()) {
+			return "redirect:/festas/{idFesta}";
+		}
 
 		System.out.println("Id da festa: " + idFesta);
 		System.out.println(convidado);
@@ -89,12 +95,13 @@ public class FestasController {
 		convidado.setFesta(festa);
 
 		cr.save(convidado);
+		attributes.addFlashAttribute("mensagem", "Convidado criado!");
 
 		return "redirect:/festas/{idFesta}";
 	}
 
 	@GetMapping("/{id}/remover")
-	public String apagarFesta(@PathVariable Long id) {
+	public String apagarFesta(@PathVariable Long id, RedirectAttributes attributes) {
 
 		Optional<Festa> opt = fr.findById(id);
 
@@ -105,19 +112,21 @@ public class FestasController {
 
 			cr.deleteAll(convidados);
 			fr.delete(festa);
+			attributes.addFlashAttribute("mensagem", "Festa removida!");
 		}
 
 		return "redirect:/festas";
 	}
 
 	@GetMapping("/{idFesta}/convidados/{idConvidado}/remover")
-	public String apagarConvidado(@PathVariable Long idFesta, @PathVariable Long idConvidado) {
+	public String apagarConvidado(@PathVariable Long idFesta, @PathVariable Long idConvidado, RedirectAttributes attributes) {
 
 		Optional<Convidado> opt = cr.findById(idConvidado);
 
 		if (!opt.isEmpty()) {
 			Convidado convidado = opt.get();
 			cr.delete(convidado);
+			attributes.addFlashAttribute("mensagem", "Convidado removido!");
 		}
 
 		return "redirect:/festas/{idFesta}";
