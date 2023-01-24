@@ -1,10 +1,15 @@
 package pi.de.diamondevents.models;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Festa {
@@ -17,9 +22,10 @@ public class Festa {
 	@NotBlank
 	private String local;
 	@NotBlank
-	private String data;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate data;
 	@NotBlank
-	private String horario;
+	private LocalTime horario;
 
 	public Long getId() {
 		return id;
@@ -45,19 +51,19 @@ public class Festa {
 		this.local = local;
 	}
 
-	public String getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
-	public void setData(String data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 
-	public String getHorario() {
+	public LocalTime getHorario() {
 		return horario;
 	}
 
-	public void setHorario(String horario) {
+	public void setHorario(LocalTime horario) {
 		this.horario = horario;
 	}
 
