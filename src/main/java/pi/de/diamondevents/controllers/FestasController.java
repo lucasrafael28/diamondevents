@@ -3,8 +3,11 @@ package pi.de.diamondevents.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,8 +34,12 @@ public class FestasController {
 	}
 
 	@PostMapping
-	public String adicionarFesta(Festa festa) {
+	public String adicionarFesta(@Valid Festa festa, BindingResult result) {
 
+		if(result.hasErrors()) {
+			return "redirect:/festas/form";
+		}
+		
 		System.out.println(festa);
 		fr.save(festa);
 

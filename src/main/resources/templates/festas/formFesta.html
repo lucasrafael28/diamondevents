@@ -12,26 +12,27 @@
 
 		<h1>Adicionar Festa</h1>
 
-		<form action="/festas" method="post">
-
+		<form action="/festas" method="post" th:object="${festa}">
+			
 			<div>
-				<input type="hidden" name="id" th:value="${festa.id}" readonly="readonly">
+				<label>Nome:</label> <input type="text" th:field="*{nome}">
+				<p th:errors="*{nome}"></p>
 			</div>
 			<div>
-				<label>Nome:</label> <input type="text" name="nome" th:value="${festa.nome}">
+				<label>Local:</label> <input type="text" th:field="*{local}">
+				<p th:errors="*{local}"></p>
 			</div>
 			<div>
-				<label>Local:</label> <input type="text" name="local" th:value="${festa.local}">
+				<label>Data:</label> <input type="text" th:field="*{data}">
+				<p th:errors="*{data}"></p>
 			</div>
 			<div>
-				<label>Data:</label> <input type="text" name="data" th:value="${festa.data}">
+				<label>Horário:</label> <input type="text" th:field="*{horario}">
+				<p th:errors="*{horario}"></p>
 			</div>
 			<div>
-				<label>Horário:</label> <input type="text" name="horario" th:value="${festa.horario}">
-			</div>
-			<div>
-				<button type="submit">Salvar</button>
-				<button type="reset">Limpar</button>
+				<button class="waves-effect waves-light btn" type="submit">Salvar</button>
+				<button class="waves-effect waves-light btn" type="reset">Limpar</button>
 			</div>
 
 		</form>
