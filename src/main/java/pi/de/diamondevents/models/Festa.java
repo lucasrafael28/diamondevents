@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -21,10 +22,10 @@ public class Festa {
 	private String nome;
 	@NotBlank
 	private String local;
-	@NotBlank
+	@NotNull
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate data;
-	@NotBlank
+	@NotNull
 	private LocalTime horario;
 
 	public Long getId() {

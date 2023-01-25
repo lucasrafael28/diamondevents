@@ -35,7 +35,7 @@
 					<td><a th:href="@{/festas/{id}(id=${f.id})}"><span
 							th:text="${f.nome}">Nome</span></a></td>
 					<td th:text="${f.local}">Local</td>
-					<td th:text="${#temporals.format(f.data, 'yyyy-MM-dd')}">Data</td>
+					<td th:text="${#temporals.format(f.data, 'dd/MM/yyyy')}">Data</td>
 					<td th:text="${f.horario}">Horário</td>
 					<td><a th:href="@{/festas/{id}/selecionar(id=${f.id})}"><i
 							class="material-icons">edit</i></a> <a

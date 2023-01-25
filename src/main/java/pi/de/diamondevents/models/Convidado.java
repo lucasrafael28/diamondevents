@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Convidado {
@@ -15,8 +16,8 @@ public class Convidado {
 	private Long id;
 	@NotBlank
 	private String nome;
-	@NotBlank
-	private String rg;
+	@NotNull
+	private int rg;
 
 	@ManyToOne
 	private Festa festa;
@@ -37,11 +38,11 @@ public class Convidado {
 		this.nome = nome;
 	}
 
-	public String getRg() {
+	public int getRg() {
 		return rg;
 	}
 
-	public void setRg(String rg) {
+	public void setRg(int rg) {
 		this.rg = rg;
 	}
 
