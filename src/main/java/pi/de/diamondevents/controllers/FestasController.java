@@ -77,7 +77,8 @@ public class FestasController {
 	}
 
 	@PostMapping("/{idFesta}")
-	public String salvarConvidado(@PathVariable Long idFesta, @Valid Convidado convidado, BindingResult result, RedirectAttributes attributes) {
+	public String salvarConvidado(@PathVariable Long idFesta, @Valid Convidado convidado, BindingResult result,
+			RedirectAttributes attributes) {
 
 		if (result.hasErrors()) {
 			return "redirect:/festas/{idFesta}";
@@ -119,7 +120,8 @@ public class FestasController {
 	}
 
 	@GetMapping("/{idFesta}/convidados/{idConvidado}/remover")
-	public String apagarConvidado(@PathVariable Long idFesta, @PathVariable Long idConvidado, RedirectAttributes attributes) {
+	public String apagarConvidado(@PathVariable Long idFesta, @PathVariable Long idConvidado,
+			RedirectAttributes attributes) {
 
 		Optional<Convidado> opt = cr.findById(idConvidado);
 
