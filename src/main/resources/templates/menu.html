@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
 <title>Diamond Events</title>
@@ -10,7 +12,10 @@
 			<a href="/" class="brand-logo">Diamond Events</a>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
 				<li><a href="#" th:href="@{/}">Home</a></li>
-				<li><a href="#" th:href="@{/festas/form}">Adicionar Evento</a></li>
+				<li sec:authorize="hasRole('ROLE_USER')"><a href="#"
+					th:href="@{/festas/form}">Adicionar Evento</a></li>
+				<li><a sec:authorize="hasRole('ADMIN')" href="#"
+					th:href="@{/admin/usuarios}">Lista de Usuários</a></li>
 			</ul>
 		</div>
 	</nav>
