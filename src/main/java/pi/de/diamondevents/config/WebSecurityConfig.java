@@ -13,8 +13,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		http.
 			authorizeRequests()
 				.antMatchers("/cadastro").permitAll()
-				.antMatchers(HttpMethod.GET, "/cadastro").permitAll()
-				.antMatchers(HttpMethod.POST, "/cadastro").permitAll()
 				.antMatchers("/user/**").hasRole("USUARIO")
 				.antMatchers("/ava/**").hasRole("AVALIADOR")
 				.antMatchers("/admin/**").hasRole("ADMIN")
