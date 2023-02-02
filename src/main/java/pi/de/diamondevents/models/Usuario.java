@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -25,6 +27,7 @@ public class Usuario implements UserDetails {
 	private String senha;
 
 	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Role> roles;
 
 	public Long getId() {

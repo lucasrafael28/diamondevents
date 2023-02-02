@@ -6,20 +6,20 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import pi.de.diamondevents.services.CustomDetailsService;
+
 @Configuration
 public class SecurityConfig {
 
 	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder builder) throws Exception {
-	    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	private CustomDetailsService detailsService;
 
-		builder
-			.inMemoryAuthentication()
-			.withUser("joao").password(encoder.encode("123")).roles("ADMIN", "USUARIO")
-			.and()
-			.withUser("jose").password(encoder.encode("123")).roles("USUARIO", "AVALIADOR");
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder builder) throws Exception {
+
+		builder.userDetailsService(detailsService).passwordEncoder(new BCryptPasswordEncoder());
 	}
-	
+
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
