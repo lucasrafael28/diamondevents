@@ -21,7 +21,7 @@
 					th:href="@{/cadastro}">Cadastre-se</a></li>
 				<li sec:authorize="!isAuthenticated()"><a href="#"
 					th:href="@{/login}">Login</a></li>
-				<li sec:authorize="isAuthenticated()">
+				<li class="right" sec:authorize="isAuthenticated()">
 					<form action="/logout" method="post">
 						<button type="submit">Sair</button>
 						<input type="hidden" th:name="${_csrf.parameterName}"
