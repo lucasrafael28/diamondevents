@@ -50,7 +50,7 @@
 						<div class="col s2">Papeis:</div>
 						<div class="col s10">
 							<div th:each="papel : ${papeis}" class="switch">
-								<div>
+								<div class="row">
 									<label><input type="checkbox" th:field="*{roles}"
 										th:value="${papel.id}" /> <span class="lever"></span> <span
 										th:text="${papel.nome}"></span> </label>

@@ -36,9 +36,10 @@
 					<label>Senha</label> <input type="password" name="senha">
 				</div>
 			</div>
-
-			<button class="btn" type="submit">Cadastrar</button>
-			<button class="btn" type="reset">Limpar</button>
+			<div class="row">
+				<button class="btn" type="submit">Cadastrar</button>
+				<button class="btn" type="reset">Limpar</button>
+			</div>
 			<input type="hidden" th:name="${_csrf.parameterName}"
 				th:value="${_csrf.token}" />
 		</form>
