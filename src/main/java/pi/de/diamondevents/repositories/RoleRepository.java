@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface RoleRepository extends CrudRepository<Role, Long> {
 
 	Role findByNome(String nome);
+
+	Iterable<Role> findAllByOrderByNomeAsc();
 }
