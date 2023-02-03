@@ -12,7 +12,8 @@
 
 	<div class="container">
 		<h1>Lista de Festas</h1>
-		<span sec:authentication="name">Bob</span>
+		<span sec:authentication="name">Bob</span> <span
+			sec:authorize="isAuthenticated()" sec:authentication="principal.nome">Bob</span>]
 	</div>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
