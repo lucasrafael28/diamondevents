@@ -10,7 +10,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta charset="UTF-8">
-<title>Diamond Events</title>
+<title>Login</title>
 </head>
 <body>
 	<div th:replace="~{menu :: menu}"></div>
@@ -26,7 +26,7 @@
 		</div>
 
 		<div id="login">
-			<form action="" method="post">
+			<form action="/login" method="post">
 				<div class="row">
 					<div class="col-4 center">
 						<label>Matrícula</label> <input type="text" name="username">
@@ -34,7 +34,7 @@
 				</div>
 				<div class="row">
 					<div class="col-4 center">
-						<label>Senha</label> <input type="password" name="senha">
+						<label>Senha</label> <input type="password" name="password">
 					</div>
 				</div>
 

@@ -11,7 +11,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta charset="UTF-8">
-<title>Diamond Events</title>
+<title>Cadastrar</title>
 </head>
 <body>
 	<div th:replace="~{menu :: menu}"></div>
@@ -20,7 +20,7 @@
 
 		<h1>Cadastre-se</h1>
 
-		<form action="/cadastro" method="post">
+		<form th:action="@{/cadastro}" method="post">
 			<div class="row">
 				<div class="col-12">
 					<label>Nome completo</label> <input type="text" name="nome">

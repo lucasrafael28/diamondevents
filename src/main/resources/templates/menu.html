@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
@@ -9,11 +10,13 @@
 <body>
 	<nav th:fragment="menu">
 		<div class="nav-wrapper container">
-			<a href="/" class="brand-logo">Diamond Events</a>
+			<a href="/" class="brand-logo center">Diamond Events</a> <span
+				sec:authorize="isAuthenticated()"
+				sec:authentication="principal.nome"></span>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
-				<li sec:authorize="hasRole('ROLE_USER')"><a href="#"
-					th:href="@{/}">Home</a></li>
-				<li sec:authorize="hasRole('ROLE_USER')"><a href="#"
+				<li sec:authorize="hasRole('ROLE_USUARIO')"><a href="#"
+					th:href="@{/}">Lista de Pergunta</a></li>
+				<li sec:authorize="hasRole('ROLE_USUARIO')"><a href="#"
 					th:href="@{/festas/form}">Adicionar Evento</a></li>
 				<li><a sec:authorize="hasRole('ADMIN')" href="#"
 					th:href="@{/admin/usuarios}">Lista de Usuários</a></li>
